@@ -149,6 +149,7 @@ class JobController extends Controller
      */
     public function show(ShowJobRequest $request): JsonResponse|IluminateResponse
     {
+        try {
         $repository = app(JobRepository::class);
 
         $domain = new JobDomain($repository);
@@ -158,15 +159,20 @@ class JobController extends Controller
         if (!$domain->exists($domain->getId())) {
             throw new JobNotFoundException($domain->getId());
         }
-
-        try {
             $job = $domain->getJobWithIncludes($request->getIncludes());
 
             return response()->json([
                 'data' => $job
             ]);
+        } catch (AbstractFindMeException  $exception) {
+            $this->commonLogLogic($repository, $exception);
+
+            return response()->json(
+                $exception->render(),
+                status: $exception->getHttpCode()
+            );
         } catch (Exception $exception) {
-            Log::error($exception);
+            $this->commonLogLogic($repository, $exception);
 
             return response()
                 ->json(
