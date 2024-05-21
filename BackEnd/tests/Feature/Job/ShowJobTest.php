@@ -139,4 +139,25 @@ class ShowJobTest extends TestCase
             ]);
     }
     //todo check if job exists exception
+    public function testJobExistsValidation()
+    {
+        $jobId = Job::max('id') + 1;
+        $this->makeRecruiter();
+
+        $this
+            ->actingAs($this->employee)
+            ->json('GET', sprintf(self::ROUTE, $jobId))
+            ->assertStatus(Response::HTTP_NOT_FOUND)
+            ->assertJsonStructure([
+                'message',
+                'additional_info' => [
+                    'job_id'
+                ]
+            ])->assertJson([
+                'message' => 'Job not found',
+                'additional_info' => [
+                    'job_id' => $jobId
+                ]
+            ]);
+    }
 }
