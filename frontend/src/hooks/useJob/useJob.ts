@@ -20,7 +20,7 @@ export const useJob = () => {
 		const getClient = new GetClient();
 
 		return await getClient.get<AxiosResponse<JobsResponse>>({
-			url: `${GetJobsRouteConst}`,
+			url: `/${GetJobsRouteConst}`,
 		});
 	};
 

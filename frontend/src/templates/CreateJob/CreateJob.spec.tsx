@@ -3,6 +3,7 @@ import { fireEvent, render, screen } from 'utils/test/test-utils';
 import { CreateJob } from './CreateJob';
 
 const textsToMatch = [
+  'Empresa',
 	'Informações do emprego',
 	'Título do Emprego',
 	'Tipo de Contratação',

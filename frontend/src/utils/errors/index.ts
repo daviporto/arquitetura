@@ -59,6 +59,8 @@ export const REQUIRED_PROFESSIONAL_EXPERIENCE_START_DATE =
 export const REQUIRED_PROFESSIONAL_EXPERIENCE =
 	'O nome da empresa é obrigatório.';
 
+export const REQUIRED_JOB_COMPANY = 'A empresa é obrigatória.';
+
 export const REQUIRED_JOB_NAME = 'O título do emprego é obrigatório.';
 
 export const REQUIRED_JOB_EMPLOYMENT_TYPE =

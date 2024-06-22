@@ -22,6 +22,7 @@ import { Base } from 'templates/Base/Base';
 import {
 	REQUIRED_JOB_ACCEPT_APPLICATION,
 	REQUIRED_JOB_APPLICATIONS_AMOUNT,
+	REQUIRED_JOB_COMPANY,
 	REQUIRED_JOB_DESCRIPTION,
 	REQUIRED_JOB_EMPLOYMENT_TYPE,
 	REQUIRED_JOB_NAME,
@@ -53,6 +54,7 @@ export const CreateJob = ({}: CreateJobProps) => {
 		maxStep,
 		register,
 		setValue,
+		companies,
 	} = useCreateJob();
 
 	return (
@@ -89,6 +91,26 @@ export const CreateJob = ({}: CreateJobProps) => {
 			<S.Form onSubmit={handleSubmit(onSubmit)}>
 				{currentStep === 1 && (
 					<>
+						<ConfigInfoWrapper
+							title="Empresa"
+							description="Selecione a empresa que deseja criar a vaga"
+						>
+							<Select
+								options={
+									companies
+										? companies?.map(({ id, name }) => ({
+												value: String(id),
+												label: name,
+											}))
+										: []
+								}
+								defaultValue=""
+								register={register}
+								requiredMessage={REQUIRED_JOB_COMPANY}
+								placeholder="Selecione a empresa"
+								name="company_id"
+							/>
+						</ConfigInfoWrapper>
 						<ConfigInfoWrapper
 							title="Título do Emprego"
 							description="Os títulos de emprego devem descrever uma posição"
@@ -196,7 +218,6 @@ export const CreateJob = ({}: CreateJobProps) => {
 						</ConfigInfoWrapper>
 
 						<ConfigInfoWrapper title="Número máximo de candidatos">
-							{/* //TODO Ana / Eduardo -> Permitir somente números nesse select*/}
 							<Controller
 								rules={{
 									required: REQUIRED_JOB_APPLICATIONS_AMOUNT,

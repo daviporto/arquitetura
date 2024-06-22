@@ -114,3 +114,5 @@ export const GetJobApplicationsRouteConst = ({
 
 	return returnUrlWithQueries(JobApplicationRouteConst, params);
 };
+
+export const GetCompaniesRouteConst = 'company'
