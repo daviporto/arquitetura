@@ -20,10 +20,10 @@ export type LoggedUserProps = {
 export const useLoggedUserStore = create<LoggedUserProps>()(
 	persist(
 		(set, get) => ({
-			id: Infinity,
+			id: 0,
 			name: '',
 			email: '',
-			type: UserEnum.RECRUITER,
+			type: UserEnum.EMPLOYEE,
 			setUser: (user) =>
 				set(() => ({
 					id: user.id || get().id,

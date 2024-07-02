@@ -16,7 +16,7 @@ export const Wrapper = styled.div`
 export const LeftSide = styled.div`
 	${({ theme }) => css`
 		width: 100%;
-    min-height: 100vh;
+		min-height: 100vh;
 		display: flex;
 		flex-direction: column;
 		justify-content: center;
@@ -60,7 +60,7 @@ export const Description = styled.div`
 export const Copy = styled.p`
 	${({ theme }) => css`
 		font-weight: ${theme.font.weights.medium};
-		font-size: ${theme.font.sizes.lg};
+		font-size: ${theme.font.sizes.md};
 	`}
 `;
 

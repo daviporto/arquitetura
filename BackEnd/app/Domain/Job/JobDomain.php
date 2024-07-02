@@ -15,6 +15,7 @@ use App\Exceptions\Job\SalaryToMustBeBiggerThanFromException;
 use App\Exceptions\Job\UnknownEmploymentTypesFilterException;
 use App\Exceptions\Job\UnknownSalaryTimeUnitsFilterException;
 use App\Exceptions\Job\UnknownWorkModelsFilterException;
+use App\Exceptions\Job\UserIdsFilterMustBePositiveIntegersException;
 use App\Exceptions\Job\WeekWorkloadMustBePositiveException;
 use App\Exceptions\Job\WeekWorkloadToMustBeBiggerThanFromException;
 use App\Http\Requests\Job\JobFilters;
@@ -173,6 +174,7 @@ readonly class JobDomain implements JobDomainInterface
      * @throws UnknownEmploymentTypesFilterException
      * @throws WeekWorkloadMustBePositiveException
      * @throws UnknownSalaryTimeUnitsFilterException
+     * @throws UserIdsFilterMustBePositiveIntegersException
      */
     public function jobsWithIncludes(array $filers, array $includes): array
     {

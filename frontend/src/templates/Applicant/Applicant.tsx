@@ -1,6 +1,5 @@
 'use client';
 import { Title } from 'components/Title';
-import Image from 'next/image';
 import { UserProps } from 'protocols/external/user/user';
 import { Base } from 'templates/Base/Base';
 import { EnvelopeClosedIcon } from '@radix-ui/react-icons';
@@ -10,6 +9,7 @@ import { yearsMonthsSinceNow } from 'utils/date';
 import { formatCellphone } from 'utils/formatCellphone';
 import * as S from './Applicant.styles';
 import { ApplicantUrl, ApplicantsUrl } from 'utils/urls';
+import { Avatar } from 'components/Avatar';
 
 export type ApplicantProps = {
 	user: UserProps;
@@ -41,17 +41,7 @@ export const Applicant = ({ user }: ApplicantProps) => {
 				<S.Container>
 					<S.LeftContent>
 						<S.Avatar>
-							<Image
-								src={`https://source.unsplash.com/random/?avatar&${user.id}`}
-								width="96"
-								height="96"
-								alt={`${user.name} avatar`}
-								style={{
-									borderRadius: '50%',
-								}}
-								loading="lazy"
-								quality={100}
-							/>
+              <Avatar user={user.name} showUsername={false} size="large" />
 							<S.AvatarTextContainer>
 								<h5>{user.name}</h5>
 								<p>Designer de Produtos</p>

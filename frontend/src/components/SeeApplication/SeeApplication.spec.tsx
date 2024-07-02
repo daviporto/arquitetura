@@ -3,6 +3,7 @@ import { SeeApplication, SeeApplicationProps } from './SeeApplication';
 
 const props: SeeApplicationProps = {
 	id: 10,
+  user_id: 1231,
 	jobId: 15,
 	name: 'Tobias',
 	email: 'tobias@gmail.com',

@@ -18,10 +18,12 @@ class CreateCompanyTest extends TestCase
     public function testCreateSuccess()
     {
         $payload = $this->generatePayload();
-
+        $response = 
         $this
             ->actingAs($this->generateRecruiterUser())
-            ->json('POST', self::ROUTE, $payload)
+            ->json('POST', self::ROUTE, $payload);
+            print_r($response->getContent());
+    $response
             ->assertStatus(Response::HTTP_CREATED)
             ->assertJsonStructure([
                 'data' => [
@@ -69,8 +71,7 @@ class CreateCompanyTest extends TestCase
             'description' => $this->faker->text,
             'phone' => $this->faker->phoneNumber,
             'email' => $this->faker->email,
-            // todo set provider pt-br in faker in order to support cpf anc cnpj
-            'cnpj' => $this->faker->numerify('############'),
+            'cnpj' => $this->faker->cnpj(false),
             'fantasy_name' => $this->faker->name,
         ];
     }

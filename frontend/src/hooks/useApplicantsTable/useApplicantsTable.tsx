@@ -1,12 +1,12 @@
 import { useQuery } from '@tanstack/react-query';
 import {
-  createColumnHelper,
-  getCoreRowModel,
-  getFilteredRowModel,
-  getPaginationRowModel,
-  getSortedRowModel,
-  SortingState,
-  useReactTable,
+	createColumnHelper,
+	getCoreRowModel,
+	getFilteredRowModel,
+	getPaginationRowModel,
+	getSortedRowModel,
+	SortingState,
+	useReactTable,
 } from '@tanstack/react-table';
 import { Avatar } from 'components/Avatar';
 import { Pill } from 'components/Pill';
@@ -16,11 +16,13 @@ import { format } from 'date-fns';
 import { ptBR } from 'date-fns/locale';
 import { useJobApplication } from 'hooks/useJobApplication';
 import {
-  JobApplication,
-  JobApplicationResponse,
+	JobApplication,
+	JobApplicationResponse,
+	JobStatus,
 } from 'protocols/external/job/job-application';
 import { useMemo, useState } from 'react';
 import { getInitialData } from 'utils/initialData';
+import { jobStatusPillVariant, translateJobApplicationStatus } from 'utils/job';
 import { GetUsersRouteConst } from 'utils/routes';
 import { JobUrl } from 'utils/urls';
 
@@ -64,7 +66,7 @@ export const useApplicantsTable = ({
 			header: () => <S.TableData>Nome completo</S.TableData>,
 			cell: (info) => (
 				<S.UserWrapperColumn>
-          <Avatar user={info.getValue()} showUsername={false} />
+					<Avatar user={info.getValue()} showUsername={false} />
 					<p title={info.getValue()}>{info.getValue()}</p>
 				</S.UserWrapperColumn>
 			),
@@ -73,8 +75,13 @@ export const useApplicantsTable = ({
 			id: 'applicant_state',
 			header: () => <S.TableData>Status</S.TableData>,
 			cell: (info) => {
+				const status = info.getValue() as unknown as JobStatus;
+
 				return (
-					<Pill text={info.getValue() as unknown as string} variant={'info'} />
+					<Pill
+						text={translateJobApplicationStatus[status]}
+						variant={jobStatusPillVariant[status]}
+					/>
 				);
 			},
 		}),
@@ -113,17 +120,18 @@ export const useApplicantsTable = ({
 				if (!info.getValue() || !info.getValue().candidates![0]) return null;
 
 				const { id, name, email, phone } = info.getValue().candidates![0];
-				const { id: jobId, cover_letter, status } = info.getValue();
+				const { id: jobId, cover_letter, status, job_id } = info.getValue();
 
 				return (
 					<SeeApplication
-						id={id}
-						jobId={jobId}
+            id={id}
+						user_id={id}
+						jobId={job_id}
 						name={name}
 						email={email}
 						phone={phone}
 						coverLetter={cover_letter}
-            status={status}
+						status={status}
 					/>
 				);
 			},

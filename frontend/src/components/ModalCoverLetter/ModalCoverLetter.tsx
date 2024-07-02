@@ -4,16 +4,25 @@ import { Textarea } from 'components/Textarea';
 import { Controller } from 'react-hook-form';
 import { REQUIRED_JOB_APP_COVER_LETTER } from 'utils/errors';
 import { useModalCoverLetter } from '.';
+import { QueryObserverResult, RefetchOptions } from '@tanstack/react-query';
 import * as S from './ModalCoverLetter.styles';
+import { AxiosResponse } from 'axios';
+import { JobApplicationResponse } from 'protocols/external/job/job-application';
 
 export type ModalCoverLetterProps = {
 	disabled: boolean;
 	jobId: number;
+	refetch: (
+		options?: RefetchOptions | undefined,
+	) => Promise<
+		QueryObserverResult<AxiosResponse<JobApplicationResponse, any>, Error>
+	>;
 };
 
 export const ModalCoverLetter = ({
 	disabled,
 	jobId,
+  refetch
 }: ModalCoverLetterProps) => {
 	const {
 		open,
@@ -26,6 +35,7 @@ export const ModalCoverLetter = ({
 		control,
 	} = useModalCoverLetter({
 		job_id: jobId,
+    refetch,
 	});
 
 	return (

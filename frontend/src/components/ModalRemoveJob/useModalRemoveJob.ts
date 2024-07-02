@@ -4,7 +4,7 @@ import { JobToBeRemoved } from 'components/ModalRemoveJob';
 import { useJob } from 'hooks/useJob';
 import { useRouter } from 'next/navigation';
 import { Dispatch, SetStateAction, useState } from 'react';
-import { GetJobRouteConst, GetJobsRouteConst } from 'utils/routes';
+import { GetJobsRouteConst, JobRouteConst } from 'utils/routes';
 import { JobsUrl } from 'utils/urls';
 
 export type UseModalRemoveJobProps = {
@@ -37,12 +37,7 @@ export const useModalRemoveJob = ({ setOpen, job }: UseModalRemoveJobProps) => {
 		}
 
 		await queryClient.invalidateQueries({
-			queryKey: [
-				`/${GetJobRouteConst({
-					job_id: job.id,
-				})}`,
-				`/${GetJobsRouteConst}`,
-			],
+			queryKey: [`/${JobRouteConst(job.id)}`, `/${GetJobsRouteConst}`],
 		});
 
 		setOpen(false);

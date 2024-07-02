@@ -1,8 +1,10 @@
 import * as S from './Pill.styles';
 
+export type PillVariant = 'success' | 'error' | 'info' | 'warning';
+
 export type PillProps = {
 	text: string;
-	variant?: 'success' | 'error' | 'info' | 'warning';
+	variant?:  PillVariant
 };
 
 export const Pill = ({ text, variant = 'success' }: PillProps) => {

@@ -32,7 +32,7 @@ class ShowCompanyTest extends TestCase
                     'phone',
                     'email',
                     'fantasy_name',
-                ]
+                ],
             ])
             ->assertJson([
                 'data' => [

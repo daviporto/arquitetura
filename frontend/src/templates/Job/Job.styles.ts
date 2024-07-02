@@ -132,10 +132,13 @@ export const JobCompanyInfo = styled.div`
 `;
 
 export const RemoveJob = styled.div`
-	display: flex;
-	flex-direction: row;
-	align-items: center;
-	justify-content: end;
-	position: relative;
-	bottom: 0;
+	${({ theme }) => css`
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: end;
+    position: relative;
+    bottom: 0;
+    gap: ${theme.space.xxsmall};
+	`}
 `;

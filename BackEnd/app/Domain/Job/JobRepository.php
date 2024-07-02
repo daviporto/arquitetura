@@ -42,7 +42,10 @@ class JobRepository implements JobRepositoryInterface
 
     public function getJobs(array $includes = []): array
     {
-        return Job::with($includes)->get()->toArray();
+        return Job::with($includes)
+            ->withCount('applications')
+            ->get()
+            ->toArray();
     }
 
     public function getJob(?int $id): array
@@ -52,7 +55,10 @@ class JobRepository implements JobRepositoryInterface
 
     public function getJobWithIncludes(?int $id, array $includes): array
     {
-        return Job::with($includes)->find($id)->toArray();
+        return Job::with($includes)
+            ->withCount('applications')
+            ->find($id)
+            ->toArray();
     }
 
     public function attachCompetences(int $id, Collection $competences): void
@@ -152,6 +158,9 @@ class JobRepository implements JobRepositoryInterface
             fn($q) => $q->whereHas('competences', fn($q) => $q->whereIn('competence_id', $filers->getCompetencesId()))
         );
 
-        return $query->with($includes)->get()->toArray();
+        return $query->with($includes)
+            ->withCount('applications')
+            ->get()
+            ->toArray();
     }
 }

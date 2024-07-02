@@ -143,5 +143,47 @@ O sistema "FindMe" é uma plataforma que visa facilitar o processo de recrutamen
 8. Visualizar suas candidaturas realizadas.
   - Tarefas e responsáveis: [Ana]
     - Tela para a visualização das candidaturas
-    
+
+## Implementação da Arquitetura Hexagonal
+
+Nossa aplicação utiliza a Arquitetura Hexagonal para isolar a lógica de negócios de serviços externos por meio de
+interfaces bem definidas. Provedores de serviço do Laravel vinculam implementações às interfaces, como o
+FileServiceProvider, que liga FileHelperInterface ao LocalFileHelper, garantindo flexibilidade e aderência ao Princípio
+da Inversão de Dependência.
+
+Aplicamos os princípios de Domain-Driven Design (DDD) com interfaces para repositórios de domínio, como
+UserRepositoryInterface. Implementações como UserRepository e UserTestRepository mantêm a lógica de negócios separada da
+persistência, facilitando a troca entre repositórios reais e mocks.
+
+A Arquitetura Hexagonal melhora a testabilidade ao isolar a lógica de negócios de dependências externas. Por exemplo,
+usamos UserTestRepository para simular a criação de usuários sem acessar o banco de dados real, tornando os testes mais
+eficientes e robustos.
+
+### Sprint Backlog (nova versão)
+
+- Front - Ajustar tabela de candidatos [Thiago]
+- Ajustes na correção da tela de login [Ana]
+- Adicionar teste jobExists na rota ShowJobTest [Eduardo]
+- padronizar fluxos para passar pelo service com com dependency injection [Davi]
+- Ajustar criação do faker para utilizar o pt-br [Ana]
+- Filtros de job [Davi]
+- front: mostrar na tela inicial as últimas aplicações do candidato [Ana]
+- Front - Ajustar a foto do FindMe na telas de auth [Ana]
+- Front - Tela de pessoas que aplicaram para a vaga [Thiago]
+- Filtros de user [Davi]
+- Front - Montar a parte da data na experiência profissional parecido com a do Linkedin [Ana]
+- Front - Criar um componente de Select [Ana]
+- Front - Tela para a criação de Job [Thiago]
+- Criar componente da Logo [Ana]
+- Ajustar fluxos que envolvem company, para linkar o id da do banco caso existir [Davi]
+- Front - Mostrar os jobs presentes no banco [Thiago]
+- Front - Criar tela para o canditato escrever o about_me , competences e professional_experiences [Thiago]
+- Front - Tela do Currículo [Thiago]
+- Crud company [Davi]
+- rota listar quais candidatos de uma vaga [Davi]
+- Adicionar experiência profissional  a users [Davi]
+- Implementar fluxo de aplicar para um vaga no back [Davi]
+- Tela de Configurações [ Thiago]
+- Criação vaga [Davi]
+- Ajustes no front( constantes, validaçõoes, loading)  [Ana]
 

@@ -18,6 +18,6 @@ describe('<JobApplications />', () => {
 
 		expect(screen.getByText('Total de Candidatos: 1')).toBeInTheDocument();
 		expect(screen.getByText('test')).toBeInTheDocument();
-		expect(screen.getByText('pending')).toBeInTheDocument();
+		expect(screen.getByText('Pendente')).toBeInTheDocument();
 	});
 });

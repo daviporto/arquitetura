@@ -9,8 +9,13 @@ type CoverLetterProps = {
 	children: ReactNode;
 };
 
-type UserCoverLetterProps = Pick<UserProps, 'id' | 'name' | 'email' | 'phone'>;
-type JobCoverLetterProps = Pick<JobApplication, 'id' | 'status' | 'cover_letter'>;
+type UserCoverLetterProps = {
+	user_id: number;
+} & Pick<UserProps, 'name' | 'email' | 'phone'>;
+
+type JobCoverLetterProps = {
+	jobId: number;
+} & Pick<JobApplication, 'id' | 'status' | 'cover_letter'>;
 
 type CoverLetter = {
 	user: UserCoverLetterProps;

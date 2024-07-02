@@ -8,6 +8,16 @@ const props: CreateJobHeaderProps = {
 
 describe('<CreateJobHeader />', () => {
 	it('should render the component', () => {
+		const { result } = renderHook(() => useLoggedUserStore());
+
+		act(() =>
+			result.current.setUser({
+				name: 'recruiter',
+				type: 'recruiter',
+				email: 'recruiter@onfly.com',
+			}),
+		);
+
 		render(<CreateJobHeader {...props} />);
 
 		expect(

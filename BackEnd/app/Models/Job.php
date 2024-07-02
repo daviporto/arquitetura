@@ -103,4 +103,9 @@ class Job extends Model
     {
         return $this->hasMany(JobApplication::class, 'job_id', 'id');
     }
+
+    public function applicationsAmount(): int
+    {
+        return $this->applications()->count();
+    }
 }

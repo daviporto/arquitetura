@@ -21,7 +21,9 @@ const Textarea = forwardRef(
 		{ maxLength, error, label, id, ...props }: TextareaProps,
 		ref?: ForwardedRef<HTMLTextAreaElement>,
 	) => {
-		const [charCount, setCharCount] = useState(0);
+		const [charCount, setCharCount] = useState(
+			props.defaultValue?.toString().length || 0,
+		);
 
 		const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
 			setCharCount(e.target.value.length);

@@ -1,9 +1,11 @@
 import { act, fireEvent, render, screen } from 'utils/test/test-utils';
 import { ModalCoverLetter, ModalCoverLetterProps } from '.';
+import { vi } from 'vitest';
 
 const props: ModalCoverLetterProps = {
 	jobId: 10,
 	disabled: false,
+	refetch: vi.fn(),
 };
 
 describe('<ModalCoverLetter />', () => {

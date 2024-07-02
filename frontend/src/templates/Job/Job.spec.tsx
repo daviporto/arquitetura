@@ -1,6 +1,7 @@
 import 'components/JobPageButton/JobPageButton.mock';
 import 'components/ModalCoverLetter/ModalCoverLetter.mock';
 import 'components/Sidebar/Sidebar.mock';
+import 'components/ModalEditJob/ModalEditJob.mock';
 import { useLoggedUserStore } from 'stores/loggedUserStore';
 import { jobMock } from 'test/mocks/external/job';
 import { act, render, renderHook, screen } from 'utils/test/test-utils';
@@ -16,7 +17,7 @@ describe('<Job />', () => {
 			queryProvider: true,
 		});
 
-		expect(screen.getAllByText(props.name)).toHaveLength(2);
+		expect(screen.getAllByText(props.name)).toHaveLength(3);
 		expect(screen.getByText(/Salário/i)).toBeInTheDocument();
 
 		if (!!props.competences?.length) {

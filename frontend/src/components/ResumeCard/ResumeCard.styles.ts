@@ -4,7 +4,7 @@ export const Wrapper = styled.section`
 	${({ theme }) => css`
 		border-radius: ${theme.borderRadius.md};
 		background-color: ${theme.colors.secondWhite};
-    margin: ${theme.space.xsmall};
+    margin: ${theme.space.xsmall} ${theme.space.large};
 	`}
 `;
 

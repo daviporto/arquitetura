@@ -6,6 +6,7 @@ import { Info } from 'components/Info';
 import { JobCapacity } from 'components/JobCapacity';
 import { JobPageButton } from 'components/JobPageButton';
 import { MediaMatch } from 'components/MediaMatch';
+import { ModalEditJob } from 'components/ModalEditJob';
 import { ModalRemoveJob } from 'components/ModalRemoveJob';
 import { Skill } from 'components/Skill';
 import { VerticalRow } from 'components/VerticalRow/VerticalRow';
@@ -19,42 +20,53 @@ import {
   translateWorkModel,
 } from 'utils/job';
 import { formatToCurrency } from 'utils/money';
-import { useJobPage } from '.';
+import { LoadingJob, useJobPage } from '.';
 import * as S from './Job.styles';
 
 export type JobProps = {} & JobResponse;
 
-export const Job = ({
-	id,
-	name,
-	company,
-	location,
-	description,
-	employment_type,
-	applications_amount,
-	work_model,
-	salary,
-	salary_time_unit,
-	is_available,
-	competences,
-	user_id,
-}: JobProps) => {
+export const Job = (initialData: JobProps) => {
 	const {
-		open,
-		setOpen,
+		job,
+		editModalOpen,
+		removeModalOpen,
+		setRemoveModalOpen,
+		setEditModalOpen,
 		paths,
-		applicants,
 		onRemoveJobClick,
 		type,
 		loggedUserId,
+    isLoading,
+    refetch
 	} = useJobPage({
-		jobId: id,
-		jobName: name,
-		companyName: company!.name,
+		initialData
 	});
+
+  if (isLoading || !job) {
+    return <LoadingJob />
+  }
+
+	const {
+		id,
+		name,
+		company,
+		location,
+		description,
+		employment_type,
+		applications_amount,
+		work_model,
+		salary,
+		salary_time_unit,
+		is_available,
+		competences,
+		user_id,
+		applications_count,
+	} = job;
+
 
 	return (
 		<Base>
+			<title>{name}</title>
 			<S.JobHeaderWrapper>
 				<Breadcrumb paths={paths} />
 
@@ -62,7 +74,8 @@ export const Job = ({
 					<S.TextWrapper>
 						<S.Title>{name}</S.Title>
 						<S.JobSubtitle>
-							{company!.name} &bull; {location && filterJobLocation(location)}{' '}
+							{company!.name}{' '}
+							{location && `• ${filterJobLocation(location)} `}
 							&bull; {translateEmploymentType[employment_type]}
 						</S.JobSubtitle>
 					</S.TextWrapper>
@@ -98,11 +111,12 @@ export const Job = ({
 							<S.JobCapacityWrapper>
 								<div>
 									<span>
-										<b>{applicants} de</b> no máximo {applications_amount}
+										<b>{applications_count} de</b> no máximo{' '}
+										{applications_amount}
 									</span>
 								</div>
 								<JobCapacity
-									applicants={applicants}
+									applicants={applications_count}
 									applications_amount={applications_amount}
 									showBottomInformation={false}
 								/>
@@ -114,7 +128,7 @@ export const Job = ({
 									title="Contratação"
 									text={translateEmploymentType[employment_type]}
 								/>
-								<Info title="Salário" text={formatToCurrency(salary)} />
+								<Info title="Salário" text={formatToCurrency(salary * 100)} />
 								<Info
 									title="Freq.Pagamento"
 									text={translateSalaryTimeUnit[salary_time_unit]}
@@ -142,9 +156,15 @@ export const Job = ({
 
 				{type === UserEnum.RECRUITER && user_id === loggedUserId && (
 					<S.RemoveJob>
+						<ModalEditJob
+							job={job}
+							setOpen={setEditModalOpen}
+							open={editModalOpen}
+              refetch={refetch}
+						/>
 						<ModalRemoveJob
-							setOpen={setOpen}
-							open={open}
+							setOpen={setRemoveModalOpen}
+							open={removeModalOpen}
 							job={{
 								id,
 								name,

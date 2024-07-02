@@ -12,7 +12,6 @@ export const Wrapper = styled.div`
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: ${theme.space.xsmall};
-      padding-right: 0;
 
       & > div:not(:first-child) {
         margin-top: 0;
@@ -22,11 +21,9 @@ export const Wrapper = styled.div`
 `;
 
 export const FilterWrapper = styled.div`
-  ${({ theme }) => css`
-    & > *:not(:first-child) {
-      margin: 2rem 0;
-    }
-  `}
+  & > *:not(:first-child) {
+    margin: 2rem 0;
+  }
 `;
 
 export const Title = styled.p`

@@ -58,7 +58,6 @@ const variantsModifiers = {
 		color: ${theme.colors.white};
 	`,
 	secondary: (theme: DefaultTheme) => css`
-		height: 4rem;
 		color: ${theme.colors.primary};
 		background: ${theme.colors.cleanBlue};
 		border: 1px solid ${theme.colors.primary};

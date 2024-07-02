@@ -1,7 +1,7 @@
-import { ApplicantsUrl, HomeUrl, JobsUrl } from 'utils/urls';
+import { ApplicantsUrl, ConfigUrl, HomeUrl, JobsUrl } from 'utils/urls';
 import { HomeIcon } from 'icons/HomeIcon/HomeIcon';
 import { SidebarItem } from 'components/SidebarItem';
-import { PersonIcon, MagnifyingGlassIcon } from '@radix-ui/react-icons';
+import { PersonIcon, MagnifyingGlassIcon, GearIcon } from '@radix-ui/react-icons';
 import { theme } from 'styles/theme';
 
 export type RecruiterSidebarItemsProps = {};
@@ -38,6 +38,18 @@ export const RecruiterSidebarItems = ({}: RecruiterSidebarItemsProps) => {
 				}
 				text="Candidatos"
 				keyword="applicant"
+			/>
+			<SidebarItem
+				href={`/${ConfigUrl}`}
+				icon={
+					<GearIcon
+						width={24}
+						height={24}
+						color={theme.colors.officialGrey}
+					/>
+				}
+				text="Configurações"
+				keyword="config"
 			/>
 		</>
 	);

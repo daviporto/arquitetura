@@ -33,7 +33,7 @@ abstract class TestCase extends BaseTestCase
 
         App::instance(App\Http\Middleware\Authenticate::class, $mock->getMock());
 
-        $this->faker = Faker::create();
+        $this->faker = Faker::create('pt_BR');
     }
 
     public function tearDown(): void

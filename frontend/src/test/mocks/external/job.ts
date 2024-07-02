@@ -27,4 +27,5 @@ export const jobMock: Job = {
 		fantasy_name: 'Itzel Crist Ltd',
 		location: null,
 	},
+	applications_count: 15,
 };

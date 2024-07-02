@@ -6,7 +6,7 @@ export async function getAuthMe(token: string): Promise<ShowUserResponse> {
 		`${process.env.NEXT_PUBLIC_BACKEND_URL}/${GetAuthMeRouteConst}`,
 		{
 			headers: { Authorization: `Bearer ${token}` },
-      cache: 'no-store',
+      cache: 'no-cache',
     },
     
 	);

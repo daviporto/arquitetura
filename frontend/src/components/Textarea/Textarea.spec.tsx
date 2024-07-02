@@ -14,6 +14,6 @@ describe('<Textarea />', () => {
 		};
 		render(<Textarea defaultValue="test" {...props} />);
 
-		expect(screen.getByText(`0/${MaxLength.description}`)).toBeInTheDocument();
+		expect(screen.getByText(`4/${MaxLength.description}`)).toBeInTheDocument();
 	});
 });

@@ -24,7 +24,7 @@ export type JobPageButtonProps = {
 };
 
 export const JobPageButton = ({ user, job }: JobPageButtonProps) => {
-	const { data, isLoading } = useJobPageButton({
+	const { data, isLoading, refetch } = useJobPageButton({
 		user,
 		job,
 	});
@@ -45,9 +45,10 @@ export const JobPageButton = ({ user, job }: JobPageButtonProps) => {
 	if (disabled && user.type === UserEnum.EMPLOYEE && applicant) {
 		return (
 			<CoverLetterProvider>
-				<ModalApplication />
+				<ModalApplication refetch={refetch} type={user.type}  />
 				<SeeApplication
-					id={user.id}
+          id={data?.data[0].id!}
+					user_id={user.id}
 					jobId={job.id}
 					name={applicant.name}
 					email={applicant.email}
@@ -59,5 +60,5 @@ export const JobPageButton = ({ user, job }: JobPageButtonProps) => {
 		);
 	}
 
-	return <ModalCoverLetter jobId={job.id} disabled={isLoading} />;
+	return <ModalCoverLetter refetch={refetch} jobId={job.id} disabled={isLoading} />;
 };

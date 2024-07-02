@@ -1,19 +1,33 @@
-import { useQueryClient } from '@tanstack/react-query';
+import {
+	QueryObserverResult,
+	RefetchOptions,
+	useQueryClient,
+} from '@tanstack/react-query';
+import { AxiosResponse } from 'axios';
 import { useJobApplication } from 'hooks/useJobApplication';
+import { JobApplicationResponse } from 'protocols/external/job/job-application';
 import { useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
-import { GetJobApplicationsRouteConst } from 'utils/routes';
+import { JobApplicationRouteConst } from 'utils/routes';
 import { JobUrl, JobsUrl } from 'utils/urls';
 
 export type UseModalCoverLetterProps = {
 	job_id: number;
+	refetch: (
+		options?: RefetchOptions | undefined,
+	) => Promise<
+		QueryObserverResult<AxiosResponse<JobApplicationResponse, any>, Error>
+	>;
 };
 
 export type JobApplicationInputs = {
 	cover_letter: string;
 };
 
-export const useModalCoverLetter = ({ job_id }: UseModalCoverLetterProps) => {
+export const useModalCoverLetter = ({
+	job_id,
+	refetch,
+}: UseModalCoverLetterProps) => {
 	const [isLoading, setIsLoading] = useState(false);
 	const [open, setOpen] = useState(false);
 
@@ -46,13 +60,13 @@ export const useModalCoverLetter = ({ job_id }: UseModalCoverLetterProps) => {
 
 		await queryClient.invalidateQueries({
 			queryKey: [
-				`/${JobsUrl}`,
+				`/${JobApplicationRouteConst}`,
 				`/${JobUrl(job_id)}`,
-				`/${GetJobApplicationsRouteConst({
-					jobsId: [job_id],
-				})}`,
+				`/${JobsUrl}`,
 			],
 		});
+
+		await refetch();
 
 		setOpen(false);
 		setIsLoading(false);

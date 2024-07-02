@@ -6,8 +6,9 @@ import { TableData } from 'components/Table/TableData';
 import { CoverLetterProvider } from 'hooks/contexts/CoverLetter';
 import { JobApplication } from 'protocols/external/job/job-application';
 import { Dispatch, SetStateAction } from 'react';
-import * as S from './ApplicantsTable.styles';
+import { useLoggedUserStore } from 'stores/loggedUserStore';
 import { MaxLength } from 'utils/maxLengths';
+import * as S from './ApplicantsTable.styles';
 
 export type ApplicantsTableProps = {
 	applicantsData: JobApplication[] | undefined;
@@ -28,6 +29,10 @@ export const ApplicantsTable = ({
 	globalFilter,
 	setGlobalFilter,
 }: ApplicantsTableProps) => {
+	const { type } = useLoggedUserStore((state) => ({
+		type: state.type,
+	}));
+
 	return (
 		<>
 			<S.TableTopContent>
@@ -44,7 +49,7 @@ export const ApplicantsTable = ({
 			</S.TableTopContent>
 
 			<CoverLetterProvider>
-				<ModalApplication />
+				<ModalApplication type={type} />
 				<TableData
 					data={table}
 					isLoading={isLoading}

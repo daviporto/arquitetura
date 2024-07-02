@@ -6,6 +6,7 @@ use App\Exceptions\Company\CnpjMustHaveTwelveDigitsException;
 
 class CompanyDomain implements CompanyDomainInterface
 {
+    const CNPJ_LENGTH = 14;
     private ?int $id;
     private int $responsibleId;
     private string $name;
@@ -174,9 +175,9 @@ class CompanyDomain implements CompanyDomainInterface
     /**
      * @throws CnpjMustHaveTwelveDigitsException
      */
-    public function setCnpj(int $cnpj): CompanyDomain
+    public function setCnpj(int|string $cnpj): CompanyDomain
     {
-        if (strlen($cnpj) !== 12) {
+        if (strlen($cnpj) !== self::CNPJ_LENGTH) {
             throw new CnpjMustHaveTwelveDigitsException($cnpj);
         }
 

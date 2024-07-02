@@ -43,6 +43,7 @@ class IndexJobTest extends TestCase
                         'company_id',
                         'created_at',
                         'updated_at',
+                        'applications_count'
                     ]
                 ]
             ]);

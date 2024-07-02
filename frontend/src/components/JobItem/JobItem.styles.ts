@@ -26,7 +26,7 @@ export const JobInfoWrapper = styled.div`
 	${({ theme }) => css`
 		display: grid;
 		gap: ${theme.space.medium};
-		grid-template-columns: 0.2fr 1fr;
+		grid-template-columns: 1fr;
 	`}
 `;
 

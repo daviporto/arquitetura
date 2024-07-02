@@ -47,3 +47,5 @@ export type ApplicationJob = {
 export type JobStatus = 'pending' | 'approved' | 'rejected' | 'canceled' | 'hired' | 'in_progress'
 
 export type JobApplicationIncludeOption = 'job' | 'candidates';
+
+export type JobsIncludeOption = 'company' | 'competences'

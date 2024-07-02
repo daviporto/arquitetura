@@ -1,5 +1,4 @@
 import { Button } from 'components/Button';
-import Image from 'next/image';
 import Link from 'next/link';
 import { useLoggedUserStore } from 'stores/loggedUserStore';
 import { CreateJobUrl } from 'utils/urls';
@@ -16,20 +15,8 @@ export const ApplicationHeader = ({}: ApplicationHeaderProps) => {
 	return (
 		<S.Header>
 			<S.CompanyWrapper>
-				<Image
-					src={`https://source.unsplash.com/random/?company_logo`}
-					width="48"
-					height="48"
-					alt={`company avatar`}
-					style={{
-						borderRadius: '50%',
-					}}
-					loading="lazy"
-					quality={100}
-				/>
 				<S.CompanyTextsWrapper>
-					<span>Empresa</span>
-					<p>Onfly</p>
+					<p>Empresa</p>
 				</S.CompanyTextsWrapper>
 			</S.CompanyWrapper>
 

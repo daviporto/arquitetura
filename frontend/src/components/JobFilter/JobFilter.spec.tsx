@@ -1,19 +1,24 @@
 import { render, screen } from 'utils/test/test-utils';
-import { JobFilter } from '.';
+import { JobFilter, JobFilterProps } from '.';
+import { vi } from 'vitest';
 
 const textsToMatch = [
-  'Tipo de Contratação',
-  'Categorias',
-  'Nível de cargo',
-  'Faixa Salarial',
+	'Tipo de Contratação',
+	'Pagamento por',
+	'Modelo de trabalho',
+	'Faixa Salarial',
 ];
 
-describe('<JobFilter />', () => {
-  it('should render the component', () => {
-    render(<JobFilter />);
+const props: JobFilterProps = {
+	setFilter: vi.fn(),
+};
 
-    textsToMatch.forEach((text) =>
-      expect(screen.getByText(text)).toBeInTheDocument(),
-    );
-  });
+describe('<JobFilter />', () => {
+	it('should render the component', () => {
+		render(<JobFilter {...props} />);
+
+		textsToMatch.forEach((text) =>
+			expect(screen.getByText(text)).toBeInTheDocument(),
+		);
+	});
 });

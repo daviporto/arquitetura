@@ -2,11 +2,9 @@ import { ExitIcon } from '@radix-ui/react-icons';
 import { ApplicantSidebarItems } from 'components/ApplicantSidebarItems';
 import { LogoFindme } from 'components/LogoFindme';
 import { RecruiterSidebarItems } from 'components/RecruiterSidebarItems';
-import Link from 'next/link';
 import { UserEnum } from 'protocols/external/user/user';
 import { useLoggedUserStore } from 'stores/loggedUserStore';
 import { theme } from 'styles/theme';
-import { ConfigUrl } from 'utils/urls';
 import { useSignOut } from '.';
 import { Avatar } from 'components/Avatar';
 import * as S from './Sidebar.styles';
@@ -35,14 +33,7 @@ export const Sidebar = ({}: SidebarProps) => {
 			</div>
 
 			<S.AvatarWrapper>
-				<Link
-					href={`/${ConfigUrl}`}
-					style={{
-						textDecoration: 'none',
-					}}
-				>
-					<Avatar showOnlyFirstName user={name} />
-				</Link>
+        <Avatar showOnlyFirstName user={name} />
 
 				<i title="Sair">
 					<ExitIcon

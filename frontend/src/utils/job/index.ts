@@ -1,3 +1,4 @@
+import { PillVariant } from 'components/Pill/Pill';
 import {
 	EmploymentType,
 	JobCompetence,
@@ -33,6 +34,15 @@ export const translateJobApplicationStatus: Record<JobStatus, string> = {
 	in_progress: 'Em progresso',
 };
 
+export const jobStatusPillVariant : Record<JobStatus, PillVariant> = {
+	hired: 'success',
+	pending: 'warning',
+	approved: 'success',
+	canceled: 'error',
+	rejected: 'error',
+	in_progress: 'info',
+}
+
 export const filterJobLocation = (location: string) => {
 	if (location.indexOf('\n') === -1) return location;
 
@@ -50,3 +60,30 @@ export const parseSkillsIntoCompetences = (
 		type: 'other',
 	})) as JobCompetence[];
 };
+
+export type SalaryRange = {
+	label: string;
+	from: number;
+	to: number;
+};
+
+export const MAX_SALARY = 10e8
+export const salaryRanges: SalaryRange[] = [
+	{ label: 'R$700 ou abaixo', from: 0, to: 700 },
+	{ label: 'R$700 - R$1000', from: 700, to: 1000 },
+	{ label: 'R$1000 - R$1500', from: 1000, to: 1500 },
+	{ label: 'R$1500 - R$2000', from: 1500, to: 2000 },
+	{ label: 'R$3000 ou acima', from: 3000, to: MAX_SALARY },
+];
+
+
+export const DEFAULT_JOB_FILTER = {
+	name: '',
+	employment_types: new Set<EmploymentType>(),
+	work_models: new Set<WorkModel>(),
+	accept_application_until: '',
+	salary_time_units: new Set<SalaryTimeUnit>(),
+	salary_from: 0,
+	salary_to: MAX_SALARY,
+};
+

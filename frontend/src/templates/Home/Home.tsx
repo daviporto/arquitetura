@@ -4,7 +4,7 @@ import { Title } from 'components/Title';
 import { UserEnum } from 'protocols/external/user/user';
 import { useLoggedUserStore } from 'stores/loggedUserStore';
 import { Base } from 'templates/Base/Base';
-import { MyApplicationsUrl } from 'utils/urls';
+import { CreateJobUrl, MyApplicationsUrl } from 'utils/urls';
 import * as S from './Home.styles';
 
 export type HomeProps = {};
@@ -17,6 +17,7 @@ export const Home = ({}: HomeProps) => {
 
 	return (
 		<Base>
+			<title>FindMe - Home</title>
 			<Title title="Início" />
 			<S.WelcomeMessage>Bem-vindo, {`${email}`}</S.WelcomeMessage>
 			{type === UserEnum.EMPLOYEE && (
@@ -29,6 +30,19 @@ export const Home = ({}: HomeProps) => {
 						/>
 					</S.MoreApplicationsWrapper>
 				</S.ApplicationsWrapper>
+			)}
+			{type === UserEnum.RECRUITER && (
+				<S.MessageRecruiter>
+					Visualize quem se candidatou às vagas e encontre o melhor perfil para
+					sua empresa!
+					<Title title="" />
+					<S.MoreApplicationsWrapper>
+						<LinkText
+							href={`/${CreateJobUrl}`}
+							text="Ou então, clique aqui para criar uma nova vaga!"
+						/>
+					</S.MoreApplicationsWrapper>
+				</S.MessageRecruiter>
 			)}
 		</Base>
 	);

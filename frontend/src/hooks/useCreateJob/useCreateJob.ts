@@ -1,4 +1,4 @@
-import { useQueryClient } from '@tanstack/react-query';
+import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { useJob } from 'hooks/useJob';
 import { useRouter } from 'next/navigation';
 import { PostJobBody } from 'protocols/external/job/job';
@@ -7,10 +7,11 @@ import { SubmitHandler, useForm } from 'react-hook-form';
 import { GetJobsRouteConst } from 'utils/routes';
 import { JobsUrl } from 'utils/urls';
 import { formatCurrencyToNumber } from 'utils/money';
+import { useCompany } from 'hooks/useCompany/useCompany';
 
 export type UseCreateJobProps = {};
 
-export type CreateJobInputs = Omit<PostJobBody, 'company_id'>;
+export type CreateJobInputs = PostJobBody;
 
 export const useCreateJob = () => {
 	const [isLoading, setIsLoading] = useState(false);
@@ -31,6 +32,7 @@ export const useCreateJob = () => {
 	});
 
 	const { createJob } = useJob();
+	const { findCompanies } = useCompany();
 	const { push } = useRouter();
 
 	const onSubmit: SubmitHandler<CreateJobInputs> = async (data, event) => {
@@ -44,7 +46,7 @@ export const useCreateJob = () => {
 			description: data.description,
 			salary: formattedSalary,
 			location: data.location,
-			company_id: 1,
+			company_id: data.company_id,
 			work_model: data.work_model,
 			is_available: true,
 			competences: data.competences,
@@ -90,6 +92,13 @@ export const useCreateJob = () => {
 		push(`/${JobsUrl}`);
 	};
 
+	const { data: response } = useQuery({
+		queryKey: [],
+		queryFn: () => findCompanies(),
+	});
+
+	const companies = response?.data.data;
+
 	return {
 		onSubmit,
 		control,
@@ -102,5 +111,6 @@ export const useCreateJob = () => {
 		maxStep,
 		register,
 		setValue,
+		companies,
 	};
 };

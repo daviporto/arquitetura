@@ -6,6 +6,11 @@ import { getAuthMe } from 'services/fetch/auth/auth';
 import { Config } from 'templates/Config';
 import { GetUserRouteConst } from 'utils/routes';
 import { HomeUrl } from 'utils/urls';
+import type { Metadata } from 'next'
+ 
+export const metadata: Metadata = {
+  title: 'FindMe - Configurações',
+}
 
 type GetDataProps = {
 	data: UserProps;

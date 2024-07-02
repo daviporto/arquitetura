@@ -74,23 +74,21 @@ export const useRegisterForm = (): UseRegisterFormProtocols => {
 				},
 			});
 
-			const result = await signIn('credentials', {
+			await signIn('credentials', {
 				email: data.email,
 				password: data.password,
 				redirect: true,
 				callbackUrl: `/${HomeUrl}`,
 			});
 
-			if (result?.status === 200) {
-				const user = await getUserInfo();
+      const user = await getUserInfo();
 
-				setUser({
-					id: user!.id,
-					name: user!.name,
-					email: user!.email,
-					type: user!.type,
-				});
-			}
+      setUser({
+        id: user!.id,
+        name: user!.name,
+        email: user!.email,
+        type: user!.type,
+      });
 
 			toast.success(response.data.message);
 		} catch (error) {
