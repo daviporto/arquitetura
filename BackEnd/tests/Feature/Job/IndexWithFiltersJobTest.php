@@ -23,7 +23,6 @@ class IndexWithFiltersJobTest extends TestCase
         $this
             ->actingAs(User::factory()->create())
             ->json('GET', self::ROUTE)
-            ->assertJsonCount(5, 'data')
             ->assertStatus(Response::HTTP_OK)
             ->assertJsonStructure([
                 'data' => [

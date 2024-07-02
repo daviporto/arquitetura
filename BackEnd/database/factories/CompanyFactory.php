@@ -29,7 +29,7 @@ class CompanyFactory extends Factory
     {
         $cnpj = '';
 
-        for ($i = 0; $i < 12; $i++) {
+        for ($i = 0; $i < 14; $i++) {
             $cnpj .= $this->faker->randomDigit;
         }
 

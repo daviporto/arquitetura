@@ -157,7 +157,7 @@ class UserService implements UserServiceInterface
             $academicRecordDomain = new AcademicRecordDomain(new AcademicRecordRepository());
 
             $academicRecordDomain->createMany($records, $userId);
-            $this->dataTransactionService->rollback();
+            $this->dataTransactionService->commit();
         } catch (Exception $exception) {
             $this->dataTransactionService->rollback();
             Log::error($exception);
