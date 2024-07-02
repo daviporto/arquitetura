@@ -93,7 +93,7 @@ export const CreateJob = ({}: CreateJobProps) => {
 					<>
 						<ConfigInfoWrapper
 							title="Empresa"
-							description="Para qual empresa deseja criar a vaga?"
+							description="Selecione a empresa que deseja criar a vaga"
 						>
 							<Select
 								options={
