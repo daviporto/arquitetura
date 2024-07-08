@@ -167,5 +167,26 @@ class ShowJobTest extends TestCase
                 ]
             ]);
     }
+
+    public function testNonNumericJobId()
+    {
+        $this->makeRecruiter();
+        
+        $this
+            ->actingAs($this->employee)
+            ->json('GET', sprintf(self::ROUTE, 'not an integer'))
+            ->assertStatus(Response::HTTP_UNPROCESSABLE_ENTITY)
+            ->assertJsonStructure([
+                'message',
+                'additional_info' => [
+                    'job_id'
+                ]
+            ])->assertJson([
+                'message' => 'Job id must be an integer',
+                'additional_info' => [
+                    'job_id' => 'not an integer'
+                ]
+            ]);
+    }
 }
 
