@@ -170,7 +170,6 @@ class ShowJobTest extends TestCase
 
     public function testNonNumericJobId()
     {
-        $jobId = Job::max('id') + 1;
         $this->makeRecruiter();
         
         $this
